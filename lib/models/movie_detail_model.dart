@@ -26,6 +26,8 @@ class MovieDetailModel {
   bool video;
   double voteAverage;
   int voteCount;
+  // EXTRA
+  // bool myList;
 
   MovieDetailModel({
     required this.adult,
@@ -53,6 +55,8 @@ class MovieDetailModel {
     required this.video,
     required this.voteAverage,
     required this.voteCount,
+    // required this.myList,
+
   });
 
   factory MovieDetailModel.fromRawJson(String str) =>
@@ -92,6 +96,7 @@ class MovieDetailModel {
         video: json["video"],
         voteAverage: json["vote_average"]?.toDouble(),
         voteCount: json["vote_count"],
+        // myList: json["myList"]
       );
 
   Map<String, dynamic> toJson() => {

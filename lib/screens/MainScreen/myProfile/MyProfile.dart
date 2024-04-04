@@ -318,6 +318,21 @@ class _MyProfileState extends State<MyProfile> {
                   ),
                 ),
               ),
+               SizedBox(
+                height: 20,
+              ),
+                     SingleChildScrollView(
+                child: SizedBox(
+                  height: 220,
+                  child: MyList(
+                    future: upcomingFuture,
+                    headlineText: 'My List',
+                  ),
+                ),
+              ),
+               SizedBox(
+                height: 20,
+              ),
               SingleChildScrollView(
                 child: SizedBox(
                   height: 220,

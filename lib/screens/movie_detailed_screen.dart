@@ -1,10 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
+// import 'package:netflix_clone/movie_list_provider.dart';
+
 import 'package:flutter/material.dart';
 import 'package:netflix_clone/common/utils.dart';
+import 'package:netflix_clone/models/movie.dart';
 import 'package:netflix_clone/models/movie_detail_model.dart';
 import 'package:netflix_clone/models/movie_recommendation_mode.dart';
 import 'package:netflix_clone/screens/lastSectionOfMovieDetailed.dart';
+import 'package:netflix_clone/screens/player/PlayerScreen.dart';
+import 'package:netflix_clone/screens/player/video.dart';
 import 'package:netflix_clone/screens/streamingPlayer.dart';
 import 'package:netflix_clone/services/api_services.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -14,6 +19,8 @@ import 'package:netflix_clone/models/movie_detail_model.dart';
 import 'package:netflix_clone/models/movie_recommendation_mode.dart';
 import 'package:netflix_clone/screens/movie_detailed_screen.dart';
 import 'package:netflix_clone/services/api_services.dart';
+import 'package:netflix_clone/widgets/movieListProvider.dart';
+import 'package:provider/provider.dart';
 
 class MovieDetailScreen extends StatefulWidget {
   final int movieId;
@@ -29,8 +36,11 @@ class MovieDetailScreenState extends State<MovieDetailScreen> {
   late Future<MovieDetailModel> movieDetail;
   late Future<MovieRecommendationsModel> movieRecommendationModel;
   late TabController _tabController;
+  late List<Movie> myList = []; 
 
-  @override
+
+
+  
   void initState() {
     fetchInitialData();
     super.initState();
@@ -200,7 +210,7 @@ class MovieDetailScreenState extends State<MovieDetailScreen> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              StreamingPlayer()),
+                                              SearchFilterScreen(mTitle:  movie.title ,)),
                                     );
                                   }),
                             ),
@@ -266,10 +276,52 @@ class MovieDetailScreenState extends State<MovieDetailScreen> {
                                 Container(
                                   child: Column(
                                     children: [
-                                      Image(
-                                        width: 35,
-                                        image: AssetImage("assets/plus.png"),
-                                        color: Color(0xFFE6E6E6),
+                                      InkWell(
+// onTap: (){},
+                                        // onTap: (){
+                                        //   setState(() {
+                                        //     movie.myList=true;
+                                        //   });
+                                        // },
+//                                         onTap: () {
+//   final movieProvider = Provider.of<MovieListProvider>(
+//     context,
+//     listen: false,
+//   );
+//   movieProvider.addToMyList(
+//     MovieList(
+//       dates: Dates(
+//         maximum: DateTime.now(), // Provide appropriate values
+//         minimum: DateTime.now(), // Provide appropriate values
+//       ),
+//       page: 1, // Provide appropriate value
+//       results: [Results()], // Provide appropriate values
+//       totalPages: 1, // Provide appropriate value
+//       totalResults: 1, // Provide appropriate value
+//     ),
+//   );
+// },
+
+                    //                     onTap: () {
+                    //   final movieProvider = Provider.of<MovieListProvider>(
+                    //     context,
+                    //     listen: false,
+                    //   );
+                    //   movieProvider.addToMyList(
+                    //     MovieList(
+
+
+                    //     ),
+                    //   );
+                    // },
+                            //              onTap: () {
+                            //   addToMyList(movie.id); // Add movie to "My List"
+                            // },
+                                        child: Image(
+                                          width: 35,
+                                          image: AssetImage("assets/plus.png"),
+                                          color: Color(0xFFE6E6E6),
+                                        ),
                                       ),
                                       Text(
                                         "My List",

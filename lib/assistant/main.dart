@@ -7,6 +7,7 @@ class AppAssistant extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: HomePageAssistant(),
       theme: ThemeData(
           fontFamily: 'SpaceGrotesk',

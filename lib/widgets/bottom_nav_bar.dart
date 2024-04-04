@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'dart:ui';
+import 'package:animate_do/animate_do.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:netflix_clone/assistant/main.dart';
+import 'package:netflix_clone/assistant/pages/home_page.dart';
+import 'package:netflix_clone/common/utils.dart';
 import 'package:netflix_clone/screens/MainScreen/myProfile/MyProfile.dart';
 import 'package:netflix_clone/screens/MainScreen/new&hot/new&hot.dart';
 import 'package:netflix_clone/screens/homescreen.dart';
@@ -176,17 +180,83 @@ class _BottomNavBarState extends State<BottomNavBar> {
         selectedItemColor: Colors.white,
         onTap: _onItemTapped,
       ),
-      floatingActionButton: FloatingActionButton(
+
+       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.black,
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => AppAssistant()),
+          // Show the dialog when the floating action button is pressed
+          showDialog(
+            
+            context: context,
+            builder: (BuildContext context) {
+              return FadeInUp
+              (
+                animate: true,
+                    duration: Duration(milliseconds: 1000),
+
+                delay: const Duration(microseconds: 500),
+                curve: Curves.fastLinearToSlowEaseIn,
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5), // The filter
+                  child: Dialog(
+                    // insetAnimationCurve:Curves.bounceIn,
+                    // contentPadding: EdgeInsets.zero,
+                backgroundColor: Colors.transparent,
+                   child :SizedBox(
+                    
+                // color: Colors.transparent,
+                
+                    width: MediaQuery.sizeOf(context).width,
+                    height: MediaQuery.sizeOf(context).height,
+                
+                      child: Column(
+                          // mainAxisAlignment: MainAxisAlignment.center,
+                          // crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container
+                            (
+                              // padding: EdgeInsets.only(top: 300),
+                              decoration: BoxDecoration
+                            (
+                              color: Colors.transparent,
+                                    
+                            ),
+                
+                            //  color:Colors.transparent,
+                               width: MediaQuery.sizeOf(context).width,
+                    height: MediaQuery.sizeOf(context).height*0.848,
+                              child: HomePageAssistant()),
+                            // Text('Custom Dialog', style: TextStyle(fontSize: 20)),
+                            // SizedBox(height: 20),
+                            // ElevatedButton(
+                            //   onPressed: () {
+                            //     // Close the dialog when the button is pressed
+                            //     Navigator.of(context).pop();
+                            //   },
+                            //   child: Text('Close'),
+                            // ),
+                          ],
+                        ),
+                    ),
+                    ),
+                ),
+              );
+            },
           );
-          // _toggleOverlay(context);
         },
-        child: Icon(Icons.mic, color: Colors.red),
+       child: Icon(Icons.mic, color: Colors.red),
       ),
+      // floatingActionButton: FloatingActionButton(
+      //   backgroundColor: Colors.black,
+      //   onPressed: () {
+      //     Navigator.push(
+      //       context,
+      //       MaterialPageRoute(builder: (context) => HomePageAssistant()),
+      //     );
+      //     // _toggleOverlay(context);
+      //   },
+      //   child: Icon(Icons.mic, color: Colors.red),
+      // ),
     );
   }
 }
