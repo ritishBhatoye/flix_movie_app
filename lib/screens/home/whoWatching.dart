@@ -225,7 +225,8 @@ class _WhoWatchingState extends State<WhoWatching> {
                     ),
                     onTap: () {
                       Navigator.pop(context);
-                    }),
+                    }
+                    ),
                 //  Divider(),
                 // TextField(
                 //   decoration: InputDecoration(labelText: "Enter your number"),

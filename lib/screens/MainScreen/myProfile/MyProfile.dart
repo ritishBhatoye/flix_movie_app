@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:netflix_clone/models/movie_detail_model.dart';
 import 'package:netflix_clone/models/userProfiles.dart';
+import 'package:netflix_clone/screens/MainScreen/myProfile/MyList.dart';
 import 'package:netflix_clone/screens/MainScreen/myProfile/manageProfile.dart';
 import 'package:flutter/material.dart';
 import 'package:netflix_clone/models/movie_model.dart';
@@ -26,6 +28,7 @@ class _MyProfileState extends State<MyProfile> {
   ApiServices apiServices = ApiServices();
 
   late Future<MovieModel> upcomingFuture;
+  late Future<MovieDetailModel> movieDetail;
   late Future<MovieModel> nowPlaying;
   late Future<TvSeriesModel> topRatedShows;
 
@@ -35,8 +38,7 @@ class _MyProfileState extends State<MyProfile> {
     nowPlaying = apiServices.getNowPlayingMovies();
     topRatedShows = apiServices.getTopRatedSeries();
     super.initState();
-  }
-
+  } 
   @override
   Widget build(BuildContext context) {
     UserProf users = UserProf.users[0];
@@ -300,9 +302,11 @@ class _MyProfileState extends State<MyProfile> {
               SingleChildScrollView(
                 child: SizedBox(
                   height: 220,
-                  child: MyList(
+                  child: MyListPersonalised
+                  (
                     future: upcomingFuture,
                     headlineText: 'My List',
+
                   ),
                 ),
               ),
@@ -312,7 +316,8 @@ class _MyProfileState extends State<MyProfile> {
               SingleChildScrollView(
                 child: SizedBox(
                   height: 220,
-                  child: TvSeries(
+                  child: TvSeries
+                  (
                     future: topRatedShows,
                     headlineText: 'Continue Watching',
                   ),
@@ -321,7 +326,7 @@ class _MyProfileState extends State<MyProfile> {
                SizedBox(
                 height: 20,
               ),
-                     SingleChildScrollView(
+              SingleChildScrollView(
                 child: SizedBox(
                   height: 220,
                   child: MyList(

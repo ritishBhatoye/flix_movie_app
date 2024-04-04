@@ -31,6 +31,8 @@ dependencies:
   timeago: ^3.3.0
   animate_do: ^3.3.4
   provider: ^6.1.2
+  comment_box: ^0.0.18
+  flutter_instagram_storyboard: ^0.0.8
   # provider: ^5.0.0
   
 

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 import 'package:netflix_clone/assistant/bloc/chat_bloc.dart';
 import 'package:netflix_clone/assistant/models/chat_message_model.dart';
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'package:animate_do/animate_do.dart';
 
@@ -16,6 +16,7 @@ class HomePageAssistant extends StatefulWidget {
 
 class _HomePageAssistantState extends State<HomePageAssistant> {
   final ChatBloc chatBloc = ChatBloc();
+
   TextEditingController textEditingController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -28,6 +29,8 @@ class _HomePageAssistantState extends State<HomePageAssistant> {
 
   }
 }
+
+
       // assistantPage(chatBloc: chatBloc, runtimeType: runtimeType, textEditingController: textEditingController);
 
 class assistantPage extends StatelessWidget {

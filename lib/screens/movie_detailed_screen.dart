@@ -19,6 +19,7 @@ import 'package:netflix_clone/models/movie_detail_model.dart';
 import 'package:netflix_clone/models/movie_recommendation_mode.dart';
 import 'package:netflix_clone/screens/movie_detailed_screen.dart';
 import 'package:netflix_clone/services/api_services.dart';
+import 'package:netflix_clone/widgets/comment_review_section/comment_section.dart';
 import 'package:netflix_clone/widgets/movieListProvider.dart';
 import 'package:provider/provider.dart';
 
@@ -278,11 +279,12 @@ class MovieDetailScreenState extends State<MovieDetailScreen> {
                                     children: [
                                       InkWell(
 // onTap: (){},
-                                        // onTap: (){
-                                        //   setState(() {
-                                        //     movie.myList=true;
-                                        //   });
-                                        // },
+                                        onTap: (){
+                                          setState(() {
+                                            movie.video=true;
+                                            // print
+                                          });
+                                        },
 //                                         onTap: () {
 //   final movieProvider = Provider.of<MovieListProvider>(
 //     context,
@@ -380,71 +382,79 @@ class MovieDetailScreenState extends State<MovieDetailScreen> {
                   const SizedBox(
                     height: 20,
                   ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius:BorderRadius.circular(120) 
+                    ),
+                    margin: EdgeInsets.only(bottom: 60),
+                    child: SizedBox(
+                      width: MediaQuery.sizeOf(context).width*0.9,
+                      height: MediaQuery.sizeOf(context).height*0.9,
+                    
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: CommentPage())),
+                  )
+                  // FutureBuilder(
+                  //   future: movieRecommendationModel,
+                  //   builder: (context, snapshot) {
+                  //     if (snapshot.hasData) {
+                  //       final movie = snapshot.data;
 
-                  // Container(
-                  //     height: MediaQuery.sizeOf(context).height,
-                  //     width: MediaQuery.sizeOf(context).width,
-                  //     child: More_N_Trailer(movieId:data[index].id,))
-                  FutureBuilder(
-                    future: movieRecommendationModel,
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        final movie = snapshot.data;
-
-                        return movie!.results.isEmpty
-                            ? const SizedBox()
-                            : Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text(
-                                    "More like this",
-                                    maxLines: 6,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 20),
-                                  GridView.builder(
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    shrinkWrap: true,
-                                    padding: EdgeInsets.zero,
-                                    scrollDirection: Axis.vertical,
-                                    itemCount: movie.results.length,
-                                    gridDelegate:
-                                        const SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 3,
-                                      mainAxisSpacing: 15,
-                                      childAspectRatio: 1.5 / 2,
-                                    ),
-                                    itemBuilder: (context, index) {
-                                      return InkWell(
-                                        onTap: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  MovieDetailScreen(
-                                                      movieId: movie
-                                                          .results[index].id),
-                                            ),
-                                          );
-                                        },
-                                        child: CachedNetworkImage(
-                                          imageUrl:
-                                              "$imageUrl${movie.results[index].posterPath}",
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ],
-                              );
-                      }
-                      return const Text("Something Went wrong");
-                    },
-                  ),
+                  //       return movie!.results.isEmpty
+                  //           ? const SizedBox()
+                  //           : Column(
+                  //               crossAxisAlignment: CrossAxisAlignment.start,
+                  //               children: [
+                  //                 const Text(
+                  //                   "More like this",
+                  //                   maxLines: 6,
+                  //                   overflow: TextOverflow.ellipsis,
+                  //                   style: TextStyle(
+                  //                     color: Colors.white,
+                  //                     fontWeight: FontWeight.bold,
+                  //                   ),
+                  //                 ),
+                  //                 const SizedBox(height: 20),
+                  //                 GridView.builder(
+                  //                   physics:
+                  //                       const NeverScrollableScrollPhysics(),
+                  //                   shrinkWrap: true,
+                  //                   padding: EdgeInsets.zero,
+                  //                   scrollDirection: Axis.vertical,
+                  //                   itemCount: movie.results.length,
+                  //                   gridDelegate:
+                  //                       const SliverGridDelegateWithFixedCrossAxisCount(
+                  //                     crossAxisCount: 3,
+                  //                     mainAxisSpacing: 15,
+                  //                     childAspectRatio: 1.5 / 2,
+                  //                   ),
+                  //                   itemBuilder: (context, index) {
+                  //                     return InkWell(
+                  //                       onTap: () {
+                  //                         Navigator.push(
+                  //                           context,
+                  //                           MaterialPageRoute(
+                  //                             builder: (context) =>
+                  //                                 MovieDetailScreen(
+                  //                                     movieId: movie
+                  //                                         .results[index].id),
+                  //                           ),
+                  //                         );
+                  //                       },
+                  //                       child: CachedNetworkImage(
+                  //                         imageUrl:
+                  //                             "$imageUrl${movie.results[index].posterPath}",
+                  //                       ),
+                  //                     );
+                  //                   },
+                  //                 ),
+                  //               ],
+                  //             );
+                  //     }
+                  //     return const Text("Something Went wrong");
+                  //   },
+                  // ),
                 ],
               );
             }
@@ -455,3 +465,9 @@ class MovieDetailScreenState extends State<MovieDetailScreen> {
     );
   }
 }
+
+
+                  // Container(
+                  //     height: MediaQuery.sizeOf(context).height,
+                  //     width: MediaQuery.sizeOf(context).width,
+                  //     child: More_N_Trailer(movieId:data[index].id,))

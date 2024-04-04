@@ -25,9 +25,14 @@ class NewNHotScreen extends StatelessWidget {
               children: [
                 Container(
                   width: 30,
-                  child: Image.asset(
-                    "assets/New&Hot/screencast.png",
-                    color: Colors.white,
+                  child: InkWell(
+                    onTap: (){
+                      
+                    },
+                    child: Image.asset(
+                      "assets/New&Hot/screencast.png",
+                      color: Colors.white,
+                    ),
                   ),
                 ),
                 Container(

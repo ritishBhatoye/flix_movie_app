@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 const imageUrl = 'https://image.tmdb.org/t/p/w500';
 const kBackgoundColor = Color(0xFF191a2c);
-const apiKey = '5ec27fca69ea1369a1c1ab746a5e199b';
+const apiKey = '9ee2733d001e23eaf6a329b04f2c7ee6';
+
+// 5ec27fca69ea1369a1c1ab746a5e199b
 const apiKeyAssistant = "AIzaSyDh1rUYZ8pdOzKDtkzD70MfVO8uSYmEJbM";
 
 Color backgroundPrimary = const Color(0xFF111015);
