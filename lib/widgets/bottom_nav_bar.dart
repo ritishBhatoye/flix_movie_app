@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'package:animate_do/animate_do.dart';
-
+import 'package:shimmer/shimmer.dart';  
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:netflix_clone/assistant/main.dart';
@@ -180,7 +180,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         selectedItemColor: Colors.white,
         onTap: _onItemTapped,
       ),
-
+    
        floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.black,
         onPressed: () {
@@ -193,7 +193,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
               (
                 animate: true,
                     duration: Duration(milliseconds: 1000),
-
+    
                 delay: const Duration(microseconds: 500),
                 curve: Curves.fastLinearToSlowEaseIn,
                 child: BackdropFilter(

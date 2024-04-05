@@ -33,6 +33,7 @@ dependencies:
   provider: ^6.1.2
   comment_box: ^0.0.18
   flutter_instagram_storyboard: ^0.0.8
+  shimmer: ^3.0.0
   # provider: ^5.0.0
   
 
@@ -83,7 +84,9 @@ flutter:
      - assets/BottomIcons/teaser_light.png
      - assets/BottomIcons/teaser.png
      - assets/loader.json
-
+     - assets/iosLoading.json
+     - assets/loading.json
+     - assets/accountSplashScreen.json
 
 
 

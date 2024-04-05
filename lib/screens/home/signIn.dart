@@ -116,7 +116,8 @@ class SignIn extends StatelessWidget {
                           MaterialPageRoute(
                               builder: (context) => const WhoWatching()),
                         );
-                      }),
+                      }
+                      ),
                 ),
                 SizedBox(height: 30),
                 Container(

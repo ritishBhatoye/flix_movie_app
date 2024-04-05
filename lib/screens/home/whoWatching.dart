@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:netflix_clone/screens/MainScreen/mainScreen.dart';
+import 'package:netflix_clone/screens/splashScreens/accountSplash.dart';
 
 class WhoWatching extends StatefulWidget {
   const WhoWatching({super.key});
@@ -207,7 +208,9 @@ class _WhoWatchingState extends State<WhoWatching> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const MainScreen()),
+                            builder: (context) => AccountSplashScreen()
+                            // MainScreen()
+                            ),
                       );
                     }),
                 Divider(),
