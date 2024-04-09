@@ -21,7 +21,7 @@ dependencies:
   carousel_slider: ^4.2.1
   intl: ^0.17.0
   # alan_voice: 3.0.0
-  video_player: ^2.8.3
+  video_player: ^2.8.5
   flick_video_player: ^0.5.0
   youtube_player_flutter: ^9.0.0
   flutter_share: ^2.0.0

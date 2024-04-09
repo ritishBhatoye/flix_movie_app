@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 // import 'package:netflix_clone/movie_list_provider.dart';
-
+import 'dart:async';
+import 'package:shimmer/shimmer.dart';  
+import 'package:video_player/video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:netflix_clone/common/utils.dart';
 import 'package:netflix_clone/models/movie.dart';
@@ -32,6 +34,10 @@ class MovieDetailScreen extends StatefulWidget {
 }
 
 class MovieDetailScreenState extends State<MovieDetailScreen> {
+   bool _showShimmer = true;
+   bool _showTeaser = true;
+   late VideoPlayerController _controller;
+
   ApiServices apiServices = ApiServices();
 
   late Future<MovieDetailModel> movieDetail;
@@ -46,6 +52,17 @@ class MovieDetailScreenState extends State<MovieDetailScreen> {
     fetchInitialData();
     super.initState();
     // _tabController = TabController(length: 2, vsync: this);
+
+       Timer(Duration(seconds: 2), () {
+      setState(() {
+        _showShimmer = false;
+      });
+    });
+    Timer(Duration(seconds: 5), () {
+      setState(() {
+         _showTeaser = false;
+      });
+    });
   }
 
   fetchInitialData() {
@@ -59,7 +76,63 @@ class MovieDetailScreenState extends State<MovieDetailScreen> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     print(widget.movieId);
-    return Scaffold(
+    return 
+    
+    _showShimmer?Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              child: Shimmer.fromColors(
+                baseColor: Color.fromARGB(129, 0, 0, 0),
+                highlightColor:  const Color.fromARGB(194, 158, 158, 158),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 30.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      SizedBox(height: 30,),
+                  
+                      Container(
+                        height: 250.0,
+                        width: MediaQuery.sizeOf(context).width*0.8,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                      ),
+                      SizedBox(height: 1,),
+                      Container(
+                        height: 30.0,
+                        width: MediaQuery.sizeOf(context).width*0.8,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                      ),
+                      SizedBox(height: 1,),
+                      Container(
+                        height: 50.0,
+                        width: MediaQuery.sizeOf(context).width*0.8,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                      ),
+                      SizedBox(height: 1,),
+                  
+                        Container(
+                        height: 200.0,
+                        width: MediaQuery.sizeOf(context).width*0.8,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            )
+         
+    : Scaffold(
       // appBar: AppBar(
       //   bottom: TabBar(
       //     controller: _tabController,
@@ -81,33 +154,34 @@ class MovieDetailScreenState extends State<MovieDetailScreen> {
 
               return Column(
                 children: [
-                  Stack(
-                    children: [
-                      Container(
-                        height: size.height * 0.4,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: NetworkImage(
-                                    "$imageUrl${movie.posterPath}"),
-                                fit: BoxFit.cover)),
-                        child: SafeArea(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              IconButton(
-                                icon: const Icon(Icons.arrow_back_ios,
-                                    color: Colors.white),
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                  
+                  // Stack(
+                  //   children: [
+                  //     Container(
+                  //       height: size.height * 0.4,
+                  //       decoration: BoxDecoration(
+                  //           image: DecorationImage(
+                  //               image: NetworkImage(
+                  //                   "$imageUrl${movie.posterPath}"),
+                  //               fit: BoxFit.cover)),
+                  //       child: SafeArea(
+                  //         child: Row(
+                  //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //           crossAxisAlignment: CrossAxisAlignment.start,
+                  //           children: [
+                  //             IconButton(
+                  //               icon: const Icon(Icons.arrow_back_ios,
+                  //                   color: Colors.white),
+                  //               onPressed: () {
+                  //                 Navigator.pop(context);
+                  //               },
+                  //             )
+                  //           ],
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
                   Padding(
                     padding:
                         const EdgeInsets.only(top: 25, left: 10, right: 10),
@@ -121,7 +195,7 @@ class MovieDetailScreenState extends State<MovieDetailScreen> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const SizedBox(height: 15),
+                        const SizedBox(height: 16),
                         Row(
                           children: [
 //                             Text(
@@ -139,7 +213,7 @@ class MovieDetailScreenState extends State<MovieDetailScreen> {
                               ),
                             ),
                             const SizedBox(
-                              width: 23,
+                              width: 4,
                             ),
                             Container(
                               width: MediaQuery.sizeOf(context).width * 0.2,
@@ -161,17 +235,26 @@ class MovieDetailScreenState extends State<MovieDetailScreen> {
                               ),
                             ),
                             const SizedBox(
-                              width: 23,
+                              width: 1,
                             ),
-                            Text(
+                            // Text(
+                            //   genresText,
+                            //   style: const TextStyle(
+                            //     color: Colors.grey,
+                            //     fontSize: 16,
+                            //   ),
+                            // ),
+                          ],
+                        ),
+                        const SizedBox(height: 5),
+
+                           Text(
                               genresText,
                               style: const TextStyle(
                                 color: Colors.grey,
-                                fontSize: 17,
+                                fontSize: 20,
                               ),
                             ),
-                          ],
-                        ),
                         const SizedBox(
                           height: 20,
                         ),

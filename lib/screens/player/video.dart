@@ -54,25 +54,29 @@ class _SearchFilterScreenState extends State<SearchFilterScreen> {
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text('Search Videos',style: TextStyle(color: Colors.white),),
+        title: Text('Choose the Best Resolution',style: TextStyle(color: Colors.white),),
       ),
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-
-              controller: _searchController,
-              decoration: InputDecoration(
-                // labelText: 'Search',
-                suffixIcon: IconButton(
-                  icon: Icon(Icons.search),
-                  onPressed: () {
-                    String query = _searchController.text;
-                    if (query.isNotEmpty) {
-                      _searchVideos(query);
-                    }
-                  },
+          Visibility(
+            visible:false,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child:
+               TextField(
+            
+                controller: _searchController,
+                decoration: InputDecoration(
+                  // labelText: 'Search',
+                  suffixIcon: IconButton(
+                    icon: Icon(Icons.search),
+                    onPressed: () {
+                      String query = _searchController.text;
+                      if (query.isNotEmpty) {
+                        _searchVideos(query);
+                      }
+                    },
+                  ),
                 ),
               ),
             ),

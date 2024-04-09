@@ -70,18 +70,23 @@ class ComingSoonMovieWidget extends StatelessWidget {
                     const Spacer(),
                     const Column(
                       children: [
-                        Icon(
-                          Icons.notifications_none_rounded,
-                          size: 25,
-                          color: Colors.white,
+                        InkWell(
+                          // onTap: ,
+                          child: Icon(
+                            Icons.notifications_none_rounded,
+                            size: 25,
+                            color: Colors.white,
+                          ),
                         ),
                         SizedBox(
                           height: 5,
                         ),
-                        Text(
-                          'Remind Me',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 8),
+                        InkWell(
+                          child: Text(
+                            'Remind Me',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 8),
+                          ),
                         )
                       ],
                     ),

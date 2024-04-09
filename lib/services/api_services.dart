@@ -63,6 +63,18 @@ class ApiServices {
     }
     throw Exception('failed to load now playing movies');
   }
+
+  Future<MovieModel> getTopRatedMovies() async {
+    endPoint = 'movie/top_rated';
+    final url = '$baseUrl$endPoint$key';
+
+    final response = await http.get(Uri.parse(url), headers: {});
+    if (response.statusCode == 200) {
+      log('success');
+      return MovieModel.fromJson(jsonDecode(response.body));
+    }
+    throw Exception('failed to load now playing movies');
+  }
   //   Future<MovieModel> getTopRatedMovies() async {
   //   endPoint = 'movie/upcoming';
   //   final url = '$baseUrl$endPoint$key';
