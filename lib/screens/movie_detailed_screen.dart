@@ -1,5 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:intl/intl.dart';
+import 'package:netflix_clone/widgets/movieList.dart';
+import 'package:netflix_clone/widgets/wishListManager.dart';
 // import 'package:netflix_clone/movie_list_provider.dart';
 import 'dart:async';
 import 'package:shimmer/shimmer.dart';  
@@ -34,6 +37,8 @@ class MovieDetailScreen extends StatefulWidget {
 }
 
 class MovieDetailScreenState extends State<MovieDetailScreen> {
+  final WishlistManager _wishlistManager = WishlistManager();
+  bool _isInWishlist = false;
    bool _showShimmer = true;
    bool _showTeaser = true;
    late VideoPlayerController _controller;
@@ -155,33 +160,33 @@ class MovieDetailScreenState extends State<MovieDetailScreen> {
               return Column(
                 children: [
                   
-                  // Stack(
-                  //   children: [
-                  //     Container(
-                  //       height: size.height * 0.4,
-                  //       decoration: BoxDecoration(
-                  //           image: DecorationImage(
-                  //               image: NetworkImage(
-                  //                   "$imageUrl${movie.posterPath}"),
-                  //               fit: BoxFit.cover)),
-                  //       child: SafeArea(
-                  //         child: Row(
-                  //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //           crossAxisAlignment: CrossAxisAlignment.start,
-                  //           children: [
-                  //             IconButton(
-                  //               icon: const Icon(Icons.arrow_back_ios,
-                  //                   color: Colors.white),
-                  //               onPressed: () {
-                  //                 Navigator.pop(context);
-                  //               },
-                  //             )
-                  //           ],
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ],
-                  // ),
+                  Stack(
+                    children: [
+                      Container(
+                        height: size.height * 0.4,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: NetworkImage(
+                                    "$imageUrl${movie.posterPath}"),
+                                fit: BoxFit.cover)),
+                        child: SafeArea(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              IconButton(
+                                icon: const Icon(Icons.arrow_back_ios,
+                                    color: Colors.white),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                   Padding(
                     padding:
                         const EdgeInsets.only(top: 25, left: 10, right: 10),
@@ -361,13 +366,76 @@ class MovieDetailScreenState extends State<MovieDetailScreen> {
                                   child: Column(
                                     children: [
                                       InkWell(
-// onTap: (){},
-                                        onTap: (){
-                                          setState(() {
-                                            movie.video=true;
-                                            // print
-                                          });
-                                        },
+                                        onTap: () {
+  MovieListPersonalised movieListPersonalised = MovieListPersonalised(
+    id: movie.id,
+    title: movie.title,
+    posterPath: movie.posterPath,
+    overview: movie.overview,
+    adult: movie.adult,
+    releaseDate: "${formatDate(movie.releaseDate)}",
+    // genres: movie.genres.map((genre) => Genre(id: genre.id, name: genre.name)).toList(),
+  );
+
+  if (_isInWishlist) {
+    _wishlistManager.removeFromWishlist(movieListPersonalised);
+  } else {
+    _wishlistManager.addToWishlist(movieListPersonalised);
+  }
+
+  setState(() {
+    _isInWishlist = !_isInWishlist;
+
+  });
+},
+//                     onTap: () 
+//                     {
+//   if (_isInWishlist) {
+//     _wishlistManager.removeFromWishlist(
+//       MovieListPersonalised(
+//         id: movie.id,
+//         title: movie.title,
+//         posterPath: movie.posterPath,
+//         overview: movie.overview,
+//         adult: movie.adult,
+//         releaseDate: "${formatDate(movie.releaseDate)}",
+//         genres: movie.genres,
+//       ),
+//     );
+//   } else {
+//     _wishlistManager.addToWishlist(
+//       MovieListPersonalised(
+//         id: movie.id,
+//         title: movie.title,
+//         posterPath: movie.posterPath,
+//         overview: movie.overview,
+//         adult: movie.adult,
+//         releaseDate: "${formatDate(movie.releaseDate)}",
+//         genres: movie.genres,
+//       ),
+//     );
+//   }
+
+//   setState(() {
+//     _isInWishlist = !_isInWishlist;
+//   });
+// },
+                    child: Image(
+                      width: 35,
+                      image: AssetImage("assets/plus.png"),
+                      color: _isInWishlist
+                          ? Colors.white
+                          : Color(0xFFE6E6E6), // Change color based on wishlist status
+                    ),
+                  ),
+//                                       InkWell(
+// // onTap: (){},
+//                                         onTap: (){
+//                                           setState(() {
+//                                             movie.video=true;
+//                                             // print
+//                                           });
+//                                         },
 //                                         onTap: () {
 //   final movieProvider = Provider.of<MovieListProvider>(
 //     context,
@@ -402,12 +470,12 @@ class MovieDetailScreenState extends State<MovieDetailScreen> {
                             //              onTap: () {
                             //   addToMyList(movie.id); // Add movie to "My List"
                             // },
-                                        child: Image(
-                                          width: 35,
-                                          image: AssetImage("assets/plus.png"),
-                                          color: Color(0xFFE6E6E6),
-                                        ),
-                                      ),
+                                      //   child: Image(
+                                      //     width: 35,
+                                      //     image: AssetImage("assets/plus.png"),
+                                      //     color: Color(0xFFE6E6E6),
+                                      //   ),
+                                      // ),
                                       Text(
                                         "My List",
                                         style: const TextStyle(
@@ -546,6 +614,10 @@ class MovieDetailScreenState extends State<MovieDetailScreen> {
         ),
       ),
     );
+  }
+    String formatDate(DateTime date) {
+    // Format date using DateFormat
+    return DateFormat('MMMM d, y').format(date);
   }
 }
 

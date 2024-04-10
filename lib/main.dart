@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:netflix_clone/screens/splash_screen.dart';
 import 'package:netflix_clone/widgets/movieListProvider.dart';
+import 'package:netflix_clone/widgets/wishListManager.dart';
 import 'package:provider/provider.dart';
 // import 'package:alan_voice/alan_voice.dart';
 
@@ -32,7 +33,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => MovieListProvider(),
+      create: (context) => WishlistManager(),
       child: MaterialApp(
         title: 'Netflix Clone',
         debugShowCheckedModeBanner: false,

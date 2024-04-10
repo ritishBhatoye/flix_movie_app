@@ -16,6 +16,8 @@ import 'package:netflix_clone/widgets/custom_carousel.dart';
 import 'package:netflix_clone/widgets/myList.dart';
 import 'package:netflix_clone/widgets/upcoming_movie_card_widget.dart';
 import 'package:netflix_clone/widgets/voice_Assistant.dart';
+import 'package:netflix_clone/widgets/wishListManager.dart';
+import 'package:provider/provider.dart';
 
 class MyProfile extends StatefulWidget {
   const MyProfile({super.key});
@@ -26,7 +28,6 @@ class MyProfile extends StatefulWidget {
 
 class _MyProfileState extends State<MyProfile> {
   ApiServices apiServices = ApiServices();
-
   late Future<MovieModel> upcomingFuture;
   late Future<MovieDetailModel> movieDetail;
   late Future<MovieModel> nowPlaying;
@@ -41,6 +42,8 @@ class _MyProfileState extends State<MyProfile> {
   } 
   @override
   Widget build(BuildContext context) {
+ final wishlistManager = Provider.of<WishlistManager>(context);
+
     UserProf users = UserProf.users[0];
     return Scaffold(
         appBar: AppBar(
@@ -326,15 +329,21 @@ class _MyProfileState extends State<MyProfile> {
                SizedBox(
                 height: 20,
               ),
-              SingleChildScrollView(
-                child: SizedBox(
-                  height: 220,
-                  child: MyList(
-                    future: upcomingFuture,
-                    headlineText: 'My List',
-                  ),
-                ),
-              ),
+              // SingleChildScrollView(
+              //   child: SizedBox(
+              //     height: 220,
+              //     child: MyList(
+              //       future: Future.value(
+              //           MovieModel(results: wishlistManager.wishlist)),
+              //       headlineText: 'My Wishlist',
+              //     ),
+
+              //     // MyList(
+              //     //   future: upcomingFuture,
+              //     //   headlineText: 'My List',
+              //     // ),
+              //   ),
+              // ),
                SizedBox(
                 height: 20,
               ),

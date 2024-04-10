@@ -68,28 +68,30 @@ class ComingSoonMovieWidget extends StatelessWidget {
                       ),
                     ),
                     const Spacer(),
-                    const Column(
-                      children: [
-                        InkWell(
-                          // onTap: ,
-                          child: Icon(
-                            Icons.notifications_none_rounded,
-                            size: 25,
-                            color: Colors.white,
-                          ),
+                     InkWell(
+                      onTap: (){
+                        _showDialog(context);
+                      },
+                       child: Column(
+                        children: [
+                        Icon(
+                          Icons.notifications_none_rounded,
+                          size: 25,
+                          color: Colors.white,
                         ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        InkWell(
-                          child: Text(
-                            'Remind Me',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 8),
+                          SizedBox(
+                            height: 5,
                           ),
-                        )
-                      ],
-                    ),
+                          InkWell(
+                            child: Text(
+                              'Remind Me',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 8),
+                            ),
+                          )
+                        ],
+                                           ),
+                     ),
                     const SizedBox(
                       width: 20,
                     ),
@@ -144,6 +146,25 @@ class ComingSoonMovieWidget extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+    void _showDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Custom Dialog'),
+          content: Text('This is a custom dialog box.'),
+          actions: <Widget>[
+            // FlatButton(
+            //   onPressed: () {
+            //     Navigator.of(context).pop(); // Close the dialog
+            //   },
+            //   child: Text('Close'),
+            // ),
+          ],
+        );
+      },
     );
   }
 }
