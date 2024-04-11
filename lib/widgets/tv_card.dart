@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
-import 'package:netflix_clone/widgets/Detail_Below_Section.dart';
 import 'package:netflix_clone/widgets/movieList.dart';
 import 'package:netflix_clone/widgets/wishListManager.dart';
 // import 'package:netflix_clone/movie_list_provider.dart';
@@ -29,15 +29,26 @@ import 'package:netflix_clone/widgets/comment_review_section/comment_section.dar
 import 'package:netflix_clone/widgets/movieListProvider.dart';
 import 'package:provider/provider.dart';
 
-class MovieDetailScreen extends StatefulWidget {
+class TvDetailedScreen extends StatefulWidget {
   final int movieId;
-  const MovieDetailScreen({super.key, required this.movieId});
+  final String name;
+  final DateTime year;
+  // final String genre;
+  final String overview;
+  final String imgUrl;
+  const TvDetailedScreen ({super.key, 
+  required this.movieId,
+  required this.name,
+  required this.year,
+  // required this.genre,
+  required this.overview,
+  required this.imgUrl});
 
   @override
-  MovieDetailScreenState createState() => MovieDetailScreenState();
+  TvDetailedScreenState createState() => TvDetailedScreenState();
 }
 
-class MovieDetailScreenState extends State<MovieDetailScreen> {
+class TvDetailedScreenState extends State<TvDetailedScreen > {
   final WishlistManager _wishlistManager = WishlistManager();
   bool _isInWishlist = false;
    bool _showShimmer = true;
@@ -150,16 +161,7 @@ class MovieDetailScreenState extends State<MovieDetailScreen> {
       //   ),
       // ),
       body: SingleChildScrollView(
-        child: FutureBuilder(
-          future: movieDetail,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              final movie = snapshot.data;
-
-              String genresText =
-                  movie!.genres.map((genre) => genre.name).join(', ');
-
-              return Column(
+        child:Column(
                 children: [
                   
                   Stack(
@@ -169,7 +171,7 @@ class MovieDetailScreenState extends State<MovieDetailScreen> {
                         decoration: BoxDecoration(
                             image: DecorationImage(
                                 image: NetworkImage(
-                                    "$imageUrl${movie.posterPath}"),
+                                    widget.imgUrl),
                                 fit: BoxFit.cover)),
                         child: SafeArea(
                           child: Row(
@@ -196,7 +198,7 @@ class MovieDetailScreenState extends State<MovieDetailScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          movie.title,
+                          widget.name,
                           style: const TextStyle(
                             fontSize: 22,
                             fontWeight: FontWeight.bold,
@@ -214,7 +216,7 @@ class MovieDetailScreenState extends State<MovieDetailScreen> {
 // ),
 
                             Text(
-                              movie.releaseDate.year.toString(),
+                              widget.year.year.toString(),
                               style: const TextStyle(
                                 color: Colors.grey,
                               ),
@@ -230,13 +232,17 @@ class MovieDetailScreenState extends State<MovieDetailScreen> {
                                 children: [
                                   SizedBox(
                                     width: 60,
-                                    child: movie.adult
-                                        ? Image(
+                                    child:Image(
                                             image: AssetImage(
-                                            'assets/a.png',
-                                          ))
-                                        : Image(
-                                            image: AssetImage('assets/ua.jpg')),
+                                            'assets/ua.jpg',
+                                          )) 
+                                    // movie.adult
+                                    //     ? Image(
+                                    //         image: AssetImage(
+                                    //         'assets/a.png',
+                                    //       ))
+                                    //     : Image(
+                                    //         image: AssetImage('assets/ua.jpg')),
                                   ),
                                 ],
                               ),
@@ -256,7 +262,7 @@ class MovieDetailScreenState extends State<MovieDetailScreen> {
                         const SizedBox(height: 5),
 
                            Text(
-                              genresText,
+                              "genresText",
                               style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 20,
@@ -301,7 +307,7 @@ class MovieDetailScreenState extends State<MovieDetailScreen> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              SearchFilterScreen(mTitle:  movie.title ,)),
+                                              SearchFilterScreen(mTitle:  widget.name ,)),
                                     );
                                   }),
                             ),
@@ -348,7 +354,7 @@ class MovieDetailScreenState extends State<MovieDetailScreen> {
                           height: 8,
                         ),
                         Text(
-                          movie.overview,
+                          widget.overview,
                           maxLines: 6,
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
@@ -368,27 +374,28 @@ class MovieDetailScreenState extends State<MovieDetailScreen> {
                                   child: Column(
                                     children: [
                                       InkWell(
-                                        onTap: () {
-  MovieListPersonalised movieListPersonalised = MovieListPersonalised(
-    id: movie.id,
-    title: movie.title,
-    posterPath: movie.posterPath,
-    overview: movie.overview,
-    adult: movie.adult,
-    releaseDate: "${formatDate(movie.releaseDate)}",
-    // genres: movie.genres.map((genre) => Genre(id: genre.id, name: genre.name)).toList(),
-  );
+                                        onTap: 
+                                        () {
+  // MovieListPersonalised movieListPersonalised = MovieListPersonalised(
+  //   id: movie.id,
+  //   title: movie.title,
+  //   posterPath: movie.posterPath,
+  //   overview: movie.overview,
+  //   adult: movie.adult,
+  //   releaseDate: "${formatDate(movie.releaseDate)}",
+  //   // genres: movie.genres.map((genre) => Genre(id: genre.id, name: genre.name)).toList(),
+  // );
 
-  if (_isInWishlist) {
-    _wishlistManager.removeFromWishlist(movieListPersonalised);
-  } else {
-    _wishlistManager.addToWishlist(movieListPersonalised);
-  }
+  // if (_isInWishlist) {
+  //   _wishlistManager.removeFromWishlist(movieListPersonalised);
+  // } else {
+  //   _wishlistManager.addToWishlist(movieListPersonalised);
+  // }
 
-  setState(() {
-    _isInWishlist = !_isInWishlist;
+  // setState(() {
+  //   _isInWishlist = !_isInWishlist;
 
-  });
+  // });
 },
 //                     onTap: () 
 //                     {
@@ -480,8 +487,8 @@ class MovieDetailScreenState extends State<MovieDetailScreen> {
                                       // ),
                                       InkWell(
                                         onTap: () {
-                                          print("Image: $imageUrl${movie.posterPath}");
-                                          print("Name: ${movie.title}");
+                                          // print("Image: $imageUrl${movie.posterPath}");
+                                          // print("Name: ${movie.title}");
                                         },
                                         child: Text(
                                           "My List",
@@ -538,30 +545,22 @@ class MovieDetailScreenState extends State<MovieDetailScreen> {
                       ],
                     ),
                   ),
-                  Positioned(
-                    bottom:1000,
-                    child: const SizedBox(
-                      height: 1,
-                    ),
+                  const SizedBox(
+                    height: 20,
                   ),
                   Container(
+                    decoration: BoxDecoration(
+                      borderRadius:BorderRadius.circular(120) 
+                    ),
+                    margin: EdgeInsets.only(bottom: 60),
+                    child: SizedBox(
+                      width: MediaQuery.sizeOf(context).width*0.9,
+                      height: MediaQuery.sizeOf(context).height*0.9,
                     
-                    height: MediaQuery.sizeOf(context).height,
-                    width: MediaQuery.sizeOf(context).width*0.99,
-                    child: DetailBelowSection(movieId: movie.id,))
-                  // Container(
-                  //   decoration: BoxDecoration(
-                  //     borderRadius:BorderRadius.circular(120) 
-                  //   ),
-                  //   margin: EdgeInsets.only(bottom: 60),
-                  //   child: SizedBox(
-                  //     width: MediaQuery.sizeOf(context).width*0.9,
-                  //     height: MediaQuery.sizeOf(context).height*0.9,
-                    
-                  //     child: ClipRRect(
-                  //       borderRadius: BorderRadius.circular(20),
-                  //       child: CommentPage())),
-                  // )
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: CommentPage())),
+                  )
                   // FutureBuilder(
                   //   future: movieRecommendationModel,
                   //   builder: (context, snapshot) {
@@ -623,11 +622,8 @@ class MovieDetailScreenState extends State<MovieDetailScreen> {
                   //   },
                   // ),
                 ],
-              );
-            }
-            return const SizedBox();
-          },
-        ),
+              ),
+           
       ),
     );
   }

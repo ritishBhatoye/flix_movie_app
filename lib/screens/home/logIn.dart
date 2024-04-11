@@ -1,14 +1,16 @@
 // import 'dart:async';
 // import 'package:flutter/material.dart';
 // import 'package:flutter/widgets.dart';
-// import 'package:lottie/lottie.dart';
+// import 'package:netflix_pages/screen/createStep1.dart';
+// import 'package:netflix_pages/screen/signIn.dart';
+// // import 'package:lottie/lottie.dart';
 // // import 'package:netflix/screens/MainScreen/mainScreen.dart';
 // // import 'package:netflix/screens/home/welcome.dart';
-// import 'package:netflix_clone/screens/MainScreen/mainScreen.dart';
-// import 'package:netflix_clone/screens/home/whoWatching.dart';
+// // import 'package:netflix_clone/screens/MainScreen/mainScreen.dart';
+// // import 'package:netflix_clone/screens/home/whoWatching.dart';
 
-// class SignIn extends StatelessWidget {
-//   const SignIn({super.key});
+// class LogIn extends StatelessWidget {
+//   const LogIn({super.key});
 
 //   @override
 //   Widget build(BuildContext context) {
@@ -30,6 +32,7 @@
 //                 child: Image.asset("assets/logo.png")),
 //           ),
 //         ),
+//         automaticallyImplyLeading: false,
 //         actions: [
 //           Container(
 //             width: MediaQuery.of(context).size.width * 0.2,
@@ -48,7 +51,7 @@
 //           child: Container(
 //             width: MediaQuery.sizeOf(context).width * 1.0,
 //             height: MediaQuery.sizeOf(context).height * 1.0,
-//             margin: EdgeInsets.symmetric(horizontal: 60, vertical: 240),
+//             margin: EdgeInsets.symmetric(horizontal: 60).copyWith(top: 220),
 //             child: Column(
 //               children: [
 //                 Container(
@@ -96,6 +99,7 @@
 //                         suffixStyle: TextStyle(color: Colors.white)),
 //                   ),
 //                 ),
+
 //                 SizedBox(height: 20),
 //                 Container(
 //                   width: MediaQuery.sizeOf(context).width * 0.8,
@@ -106,7 +110,7 @@
 //                           shape: const RoundedRectangleBorder(
 //                               borderRadius: BorderRadius.all(Radius.zero))),
 //                       child: const Text(
-//                         "Sign In",
+//                         "Log In",
 //                         style: TextStyle(
 //                             fontWeight: FontWeight.w700, fontSize: 15.5),
 //                       ),
@@ -114,24 +118,48 @@
 //                         Navigator.push(
 //                           context,
 //                           MaterialPageRoute(
-//                               builder: (context) => const WhoWatching()),
+//                               builder: (context) => const Createstep1()),
 //                         );
 //                       }
 //                       ),
 //                 ),
 //                 SizedBox(height: 30),
 //                 Container(
-//                   child: Text(
-//                     "Recover Password",
-//                     style: TextStyle(
-//                         fontWeight: FontWeight.w900,
-//                         fontSize: 15,
-//                         color: Color(0xFFE6E6E6)),
+//                   child: Row(
+//                     mainAxisAlignment: MainAxisAlignment.center,
+//                     children: [
+//                       Text(
+//                         "New to Netflix?",
+//                         style: TextStyle(
+//                             // fontWeight: FontWeight.w,
+//                             fontSize: 15,
+//                             color: Color(0xFFE6E6E6)),
+//                       ),
+//                       SizedBox(width: 4,),
+//                        InkWell(
+//                         onTap: () {
+//                         Navigator.push(
+//                           context,
+//                           MaterialPageRoute(
+//                               builder: (context) => const SignIn()),
+//                         );
+//                       },
+//                          child: Text(
+//                           "Sign In",
+//                           style: TextStyle(
+//                               fontWeight: FontWeight.w600,
+//                               fontSize: 15,
+                         
+//                               color: Color(0xFFE6E6E6)),
+//                                                ),
+//                        ),
+//                     ],
 //                   ),
 //                 ),
 //                 SizedBox(height: 35),
 //                 Container(
 //                   child: Column(
+//                     crossAxisAlignment: CrossAxisAlignment.center,
 //                     mainAxisAlignment: MainAxisAlignment.center,
 //                     children: [
 //                       Text(

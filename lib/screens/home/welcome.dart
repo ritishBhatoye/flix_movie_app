@@ -8,6 +8,7 @@ import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 // import 'package:netflix/screens/home/signIn.dart';
 import 'package:netflix_clone/screens/home/signIn.dart';
+import 'package:netflix_clone/screens/home/signIn_.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -397,7 +398,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const SignIn()),
+                        MaterialPageRoute(builder: (context) =>  SignIn()),
                       );
                     })
                 // TextButton(

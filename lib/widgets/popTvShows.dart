@@ -4,6 +4,7 @@ import 'package:netflix_clone/models/movie_model.dart';
 import 'package:netflix_clone/screens/movie_detailed_screen.dart';
 import 'package:netflix_clone/models/tv_series_model.dart';
 import 'package:netflix_clone/models/popularTVSeries.dart';
+import 'package:netflix_clone/widgets/tv_card.dart';
 
 class Poptvshows extends StatelessWidget {
   final Future<PopularTVSeries> future;
@@ -22,6 +23,7 @@ class Poptvshows extends StatelessWidget {
         future: future,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
+
             var data = snapshot.data?.results;
             return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,11 +46,18 @@ class Poptvshows extends StatelessWidget {
                             padding: const EdgeInsets.all(5.0),
                             child: InkWell(
                               onTap: () {
+                                print("Id: ${data[index].id}");
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => MovieDetailScreen(
+                                    builder: (context) => TvDetailedScreen(
+                                            
+                                        year:  DateTime.parse(data[index].firstAirDate!),
+                                      // genre: data[index].genreIds.
+                                      name: data[index].name!,
+                                      imgUrl: "$imageUrl${data[index].posterPath}",
                                       movieId: data[index].id!,
+                                      overview: data[index].overview!,
                                     ),
                                   ),
                                 );
